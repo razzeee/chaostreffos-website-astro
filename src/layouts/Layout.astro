@@ -1,22 +1,72 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import { Image } from "astro:assets";
+import CTreffLogo from "../assets/ctreffos-logo.png";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import Head from "../components/Head.astro";
+import "../../base.css";
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+const { title } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <Head title={title} />
+  <body>
+    <div class="min-h-screen flex justify-center">
+      <div class="flex flex-col min-h-screen">
+        <a href={`/${lang}`}>
+          <header class="flex flex-col items-center sm:items-start pb-6">
+            <Image
+              src={CTreffLogo}
+              alt="Chaostreff Osnabrück Logo"
+              class="invert-0 dark:invert"
+              width={517}
+              height={299}
+              loading="eager"
+            />
+          </header>
+        </a>
+        <main
+          class="flex flex-col gap-8 md:max-w-2xl row-start-2 items-center sm:items-start"
+        >
+          <slot />
+        </main>
+        <footer class="flex flex-col gap-3 py-8">
+          <hr />
+          <div
+            class="flex flex-col sm:flex-row gap-8 items-center sm:items-start"
+          >
+            <a href={`/${lang}`}>{t("nav.home")}</a>
+            <a href={`/${lang}/site-notice`}>
+              {t("nav.site-notice")}
+            </a>
+            <a href={`/${lang}/privacy-policy`}>
+              {t("nav.privacy-policy")}
+            </a>
+            <a href={`/${lang}/legal-notice`}>
+              {t("nav.legal-notice")}
+            </a>
+            <a href={`/${lang}/donate`}>
+              {t("nav.donate")}
+            </a>
+          </div>
+
+          <div class="flex gap-6 justify-center">
+            <a href="/de">Deutsch</a>
+            <a href="/en">English</a>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </body><style>
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</html>
