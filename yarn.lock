@@ -1892,6 +1892,7 @@ __metadata:
     ical.js: "npm:^2.1.0"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
+    sharp: "npm:^0.33.5"
     tailwindcss: "npm:^3.4.17"
   languageName: unknown
   linkType: soft
@@ -4937,7 +4938,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sharp@npm:^0.33.3":
+"sharp@npm:^0.33.3, sharp@npm:^0.33.5":
   version: 0.33.5
   resolution: "sharp@npm:0.33.5"
   dependencies:
